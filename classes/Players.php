@@ -183,7 +183,7 @@ class Players implements GameInterface {
     }
 
     public static function deleteById($id) {
-        $table_players = self::fetchById($id);
+        $play = self::fetchById($id);
         $dbConnection = Database::getInstance()->getConnection();
         $stmt = $dbConnection->prepare("DELETE FROM player_table WHERE id = ?");
         if($stmt === false) {
@@ -195,8 +195,8 @@ class Players implements GameInterface {
         }
         $stmt->close();
 
-        if(file_exists($table_players['image_path'])) {
-            unlink($table_players['image_path']);
+        if(file_exists($play['image_path'])) {
+            unlink($play['image_path']);
         }
     }
 
